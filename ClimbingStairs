@@ -1,0 +1,30 @@
+package dynamicProgramming;
+
+import java.util.Arrays;
+
+public class ClimbingStairs {
+	public static long climbStairs(int n, long[] cache) {
+		if(n==0) {
+			return 1;//0th step pe jab ponch gaye tab 1 way bn jaye ga
+		}
+		if(n<0) {
+			return 0;
+			
+		}// here argument is one i.e n and only that is changing so we will only take 1d arrayu
+		
+		if(cache[n]!=-1) {
+			return cache[n];
+		}
+		long c1=climbStairs(n-1, cache); 
+		long c2=climbStairs(n-2, cache);
+		cache[n]= c1+c2;
+		return cache[n];// change n mein ho ra hai so store bhi n mein hoga
+		
+	}
+	public static void main(String[] args) {
+		int n=65;
+		long[] cache= new long[n+1];
+		Arrays.fill(cache, -1);
+		System.out.print(climbStairs(n, cache));
+	}
+}
