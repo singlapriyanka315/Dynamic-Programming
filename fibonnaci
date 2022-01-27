@@ -1,0 +1,24 @@
+class Solution {
+    
+    public int fib(int n) {
+        int cache[] =new int[n+1]; 
+        Arrays.fill(cache,-1);
+        return FibMemoized(n,cache);
+    }
+    
+    public static int FibMemoized(int n,int cache[]){
+        if(n==0 || n==1){
+            return n;
+        }
+        
+        if(cache[n]!=-1){ // no recursion as value array visited earlier
+            return cache[n];
+        }
+        
+        int fibnm1=FibMemoized(n-1,cache);
+        int fibnm2=FibMemoized(n-2,cache);
+        int fibn=fibnm1+fibnm2;
+        cache[n]=fibn;// store in array
+        return fibn;
+    }
+}
