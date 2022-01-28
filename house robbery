@@ -1,0 +1,23 @@
+class Solution {
+    public int rob(int[] house) {
+        int n= house.length;
+        int cache[]= new int[n+1];
+        Arrays.fill(cache, -1);
+        return help(house, house.length, 0, cache);
+        
+    }
+    public int help(int house[],int n , int curr, int cache[]){
+        
+        if (curr>=n) return 0;
+        
+        if(cache[curr]!=-1){
+            return cache[curr];
+        }
+        
+        int rob = help(house, n, curr+2, cache) + house[curr];
+        int dontrob = help(house, n, curr+1, cache);
+        
+        return cache[curr] = Math.max(rob, dontrob);
+        
+    }
+}
