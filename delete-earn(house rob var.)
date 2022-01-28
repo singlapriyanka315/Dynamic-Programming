@@ -1,0 +1,36 @@
+// house robbery varient 
+
+class Solution {
+    
+    private static int sol(int[] house, int curr, int n, int[] cache) {
+		if(curr>=n) {
+			return 0;
+		}
+		if(cache[curr]!=-1) {
+			return cache[curr];
+		}
+		int rob= sol(house, curr+2, n, cache) + house[curr];
+		int dontRob =sol(house, curr+1, n, cache);
+		return cache[curr]= Math.max(rob,  dontRob);
+		
+		
+	}
+
+    public static int deleteAndEarn(int[] arr ) {
+        
+        int maxVal=Integer.MIN_VALUE;
+        for(int e: arr){
+            maxVal =Math.max(maxVal,e);
+        }
+        
+        int[] house= new int[maxVal+1];
+        for (int e :arr){
+            house[e]=house[e]+e;
+        }
+        
+        int curr=0;
+        int[] cache= new int[maxVal+1];
+        Arrays.fill(cache, -1);
+        return sol(house,0, maxVal+1, cache);
+    }
+}
